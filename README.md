@@ -1,5 +1,13 @@
-# 📊 Multimodal Financial Report Analyzer
+<h1 align="center">📊 Multimodal Financial Report Analyzer</h1>
+
+<p align="center">
 AI-Powered Financial Document Analysis Using Google's Gemini API
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white" alt="Python 3.12">
+</p>
+
+
 
 ## 🔍 Overview
 This Python tool leverages Google's Gemini multimodal models to analyze financial documents (PDFs or images) and automatically generate structured, insightful, and visually enriched financial reports.
@@ -61,13 +69,15 @@ cd financial-analyzer
         brew install poppler
         ```
         Windows:
-        - Download and install from Poppler for Windows.
+        -   Download and extract Poppler from the official GitHub releases:  
+            [Poppler for Windows - Installation Guide](https://github.com/oschwartz10612/poppler-windows#installation).
    
 
    - WeasyPrint dependencies (Cairo, Pango, GDK-PixBuf, etc.):
         
      Follow the official installation guide:
-     WeasyPrint Installation
+     [WeasyPrint Installation](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html)
+     - [WeasyPrint Installation on Windows via WSL](https://weasyprint.org/docs/install/)
 
 3. Install Python Dependencies
 ```bash
@@ -92,11 +102,24 @@ You can run the tool with either:
 python main.py \
   --input_images_dir input_images \
   --model_name gemini-1.5-pro \
-  --from_pdf_path source_docs/Your_Report.pdf \
+  --from_pdf_path source_docs/ABN_AMRO_Bank_Q3_2024.pdf \
   --analysis_mode full_context
+```
+```bash
+python main.py \
+  --input_images_dir my_new_image_dir \
+  --model_name gemini-1.5-flash-8b \
+  --from_pdf_path source_docs/ABN_AMRO_Bank_Q3_2024.pdf \
+  --analysis_mode smart
 ```
 ### 🔸 From Directory of Images
 
+```bash
+python main.py \
+  --input_images_dir input_images \
+  --model_name gemini-1.5-pro \
+  --analysis_mode full_context
+```
 ```bash
 python main.py \
   --input_images_dir input_images \
@@ -126,15 +149,15 @@ python main.py \
     ├── README.md
 
 
-## License
+## 📄 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 🙌 Acknowledgements
 - Powered by Google's Gemini multimodal models
 
-- PDF/image processing via pdf2image, PIL, markdown2pdf
+- PDF/image processing via `pdf2image`, `PIL`, `markdown2pdf`.
 
-- CLI support via python-fire
+- CLI support via `python-fire`.
 
 ## 📬 Contact
 Have questions, suggestions, or want to contribute?
