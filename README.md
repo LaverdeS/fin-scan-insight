@@ -126,6 +126,9 @@ python main.py \
     ├── README.md
 
 
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 ## 🙌 Acknowledgements
 - Powered by Google's Gemini multimodal models
 
