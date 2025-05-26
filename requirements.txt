@@ -1,0 +1,9 @@
+google-generativeai
+python-dotenv
+pdf2image
+Pillow
+fire
+markdown2
+fpdf2
+PyPDF2
+weasyprint

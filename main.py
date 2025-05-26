@@ -291,20 +291,14 @@ def analyse_and_report(
     with open(report_filename, 'w', encoding='utf-8') as f:
         f.write(response.text)
 
-    logging.info(f"generating .pdf report...")
-    generate_report_with_images(report_filename)
+    logging.info(f"generating PDF report...")
+
+    try:
+        generate_report_with_images(report_filename)
+    except Exception as e:
+        logging.error(f"error generating PDF report: {e}...")
+        raise RuntimeError(f"❌ please make sure you have all required packages installed and try again...")
 
 
 if __name__ == "__main__":#
     Fire(analyse_and_report)
-
-    """script execution example:
-    
-    FROM PDF:
-        python main.py --input_images_dir input_images --model_name gemini-1.5-pro --from_pdf_path source_docs/ABN_AMRO_Bank_Q3_2024.pdf --analysis_mode full_context
-        python main.py --input_images_dir my_new_image_dir --model_name gemini-1.5-flash-8b --from_pdf_path source_docs/ABN_AMRO_Bank_Q3_2024.pdf --analysis_mode smart
-    
-    FROM DIRECTORY OF IMAGES:
-        python main.py --input_images_dir input_images --model_name gemini-1.5-pro --analysis_mode full_context
-        python main.py --input_images_dir input_images --model_name gemini-1.5-flash-8b --analysis_mode smart
-    """
