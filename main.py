@@ -1,9 +1,11 @@
 import os
+import time
 import google.generativeai as gemini_api
 import logging
 
 from dotenv import load_dotenv
 from markdown2pdf import generate_report_with_images
+from google.api_core.exceptions import InternalServerError
 from pdf2image import convert_from_path
 from pathlib import Path
 from typing import Union, List
@@ -300,5 +302,24 @@ def analyse_and_report(
         raise RuntimeError(f"❌ please make sure you have all required packages installed and try again...")
 
 
+MAX_RETRIES = 3
+RETRY_DELAY = 5  # seconds
+
+
 if __name__ == "__main__":#
-    Fire(analyse_and_report)
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            Fire(analyse_and_report)
+            break  # Success: exit loop
+        except InternalServerError as e:
+            print(f"[❌] InternalServerError on attempt {attempt}: {e}")
+            if attempt < MAX_RETRIES:
+                print(f"[🔁] Retrying in {RETRY_DELAY} seconds...")
+                time.sleep(RETRY_DELAY)
+            else:
+                print("[🚫] All retries exhausted due to internal server error.")
+                raise
+        except Exception as e:
+            # Let other exceptions fail immediately
+            print(f"[💥] Unhandled error: {e}")
+            raise
